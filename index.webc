@@ -1,0 +1,101 @@
+<script webc:setup>
+  const faqs = [
+    {
+      question: 'What is Frontend Mentor, and how will it help me?',
+      answer: `
+          Frontend Mentor offers realistic coding challenges to help developers improve their
+          frontend coding skills with projects in HTML, CSS, and JavaScript.It's suitable for
+          all levels and ideal for portfolio building.
+      `
+    },
+    {
+      question: 'Is Frontend Mentor free?',
+      answer: `
+          Yes, Frontend Mentor offers both free and premium coding challenges, with the free
+          option providing access to a range of projects suitable for all skill levels.</p>
+      `,
+    },
+    {
+      question: `Can I use Frontend Mentor projects in my portfolio?`,
+      answer: `
+          Yes, you can use projects completed on Frontend Mentor in your portfolio. It's
+          an excellent
+          way to showcase your skills to potential employers!
+      `,
+    },
+    {
+      question: `
+          How can I get help if I'm stuck on a Frontend Mentor challenge?
+      `,
+      answer: `
+          The best place to get help is inside Frontend Mentor's Discord community.
+          There's a help
+          channel where you can ask questions and seek support from other community members.
+      `
+    }
+  ];
+
+  const questionId = (id) => {
+    return 'expand_' + id;
+  }
+  const answerId = (id) => {
+    return 'p_' + id;
+  }
+</script>
+<script type="module">
+  let expandState = {};
+  function onExpand(event) {
+    var expanded = false;
+    var index = event.target.id.split('_')[1];
+    var p_id = 'p_' + index;
+    if (event.target.id in expandState) {
+      var expanded = expandState[event.target.id];
+    }
+    if (expanded === true) {
+      expandState[event.target.id] = false;
+      event.target.src = './assets/images/icon-plus.svg';
+      document.getElementById(p_id).classList.add('p_invisible');
+      document.getElementById(p_id).classList.remove('p_visible');
+    } else {
+      expandState[event.target.id] = true;
+      event.target.src = './assets/images/icon-minus.svg';
+      document.getElementById(p_id).classList.add('p_visible');
+      document.getElementById(p_id).classList.remove('p_invisible');
+    }
+  }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | FAQ accordion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" webc:keep>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin webc:keep>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Work+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet" webc:keep>
+  <link rel="stylesheet" href="style.css" webc:keep>
+  <script @raw="getBundle('js')" webc:keep></script>
+
+</head>
+
+<body>
+  <div class="content">
+    <header>
+      <img src="./assets/images/icon-star.svg" alt="">
+      <h1>FAQs</h1>
+    </header>
+    <main>
+      <faq webc:for="(item, index) of faqs" :@question="item.question" :@answer="item.answer"
+        :@question-id="questionId(index)" :@answer-id="answerId(index)"></faq>
+    </main>
+  </div>
+</body>
+
+</html>

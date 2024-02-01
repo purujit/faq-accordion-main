@@ -1,0 +1,10 @@
+<section class="faq">
+    <div class="content__question">
+        <h2 @text="question"></h2>
+        <img :id="questionId" src="./assets/images/icon-plus.svg" alt="expand answer" onclick="onExpand(event)">
+    </div>
+    <p :id="answerId" class="p_invisible" @text="answer">Yes, Frontend Mentor offers both free and premium coding
+        challenges, with the
+        free
+        option providing access to a range of projects suitable for all skill levels.</p>
+</section>
